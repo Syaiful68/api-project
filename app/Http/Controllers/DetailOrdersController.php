@@ -50,6 +50,11 @@ class DetailOrdersController extends Controller
                 'dept' => $value->dept,
             ]);
         }
+
+        Orders::query()->where('user_id', Auth::user()->id)->delete();
+        return response()->json([
+            'success' => 'Data has been created'
+        ], 201);
     }
 
     /**
