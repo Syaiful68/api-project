@@ -1,18 +1,23 @@
 <?php
 
-use App\Http\Controllers\CodeOrderController;
-use App\Http\Controllers\DetailOrdersController;
-use App\Http\Controllers\OrdersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AssetsController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\DetailOrdersController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
 
+// orders
 Route::apiResource('orders', OrdersController::class);
-Route::apiResource('checkout', DetailOrdersController::class);
-Route::apiResource('test', CodeOrderController::class);
 
-// Route::get('/test', CodeOrderController::class, 'index');
+// detail order
+Route::get('checkout', [DetailOrdersController::class, 'index']);
+Route::get('checkout/submit', [DetailOrdersController::class, 'submit']);
+Route::get('checkout/{checkout}', [DetailOrdersController::class, 'show']);
+Route::patch('checkout/update/{checkout}', [DetailOrdersController::class, 'update']);
+
+Route::apiResource('asset', AssetsController::class);

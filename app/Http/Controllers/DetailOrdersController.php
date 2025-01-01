@@ -23,7 +23,7 @@ class DetailOrdersController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store()
+    public function submit()
     {
         $code = code_order::query();
         if ($code->first('id') === null) {
@@ -83,13 +83,24 @@ class DetailOrdersController extends Controller
     public function update(Request $request, detail_orders $detail_orders)
     {
         //
+        $query = code_order::query()->where('id', $detail_orders);
+        if ($query->first() === null) {
+            return response()->json([
+                'message' => 'Data not found'
+            ], 404);
+        }
+        $query->update([
+            'status' => $request->status,
+            'user_id' => Auth::user()->id
+        ]);
+
+        return response()->json([
+            'message' => 'Data has been updated'
+        ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(detail_orders $detail_orders)
-    {
-        //
-    }
+    public function destroy(detail_orders $detail_orders) {}
 }
