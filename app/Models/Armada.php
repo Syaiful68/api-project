@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProfileAsset extends Model
+class Armada extends Model
 {
     //
-    protected $table = 'code_orders';
+    protected $table = 'tb_armadas';
     protected $guarded = ['id'];
 }
