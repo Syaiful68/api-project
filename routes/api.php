@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssetRepairController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AssetsController;
@@ -13,6 +14,7 @@ Route::get('/user', function (Request $request) {
 
 // orders
 Route::apiResource('orders', OrdersController::class);
+Route::apiResource('repair', AssetRepairController::class);
 
 // detail order
 Route::get('checkout', [DetailOrdersController::class, 'index']);
